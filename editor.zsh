@@ -131,7 +131,7 @@ bind-vim viins -- reverse-menu-complete "$terminfo[kcbt]" # <Shift-Tab>: Go to t
 bind-vim viins -- expand-cmd-path       '\ee'             # <Esc-e>: Expand command name to full path
 
 ### Tricks
-bind-vim vicmd -- edit-command-line    'v'   # <v>: Edit command in an external editor
+bind-vim vicmd -- edit-command-line    'v'   # <v>: Edit command in an external editor TODO
 bind-vim viins -- prepend-sudo         '\es' # <Esc-s>: Insert sudo at the beginning of the line
 bind-vim viins -- clear-screen         '^L'  # <Ctrl-l>: Clear screen
 bind-vim viins -- copy-prev-shell-word '\em' # <Esc-m>: Duplicate the previous word

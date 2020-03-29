@@ -103,9 +103,8 @@ bind-vim viins vicmd -- kill-line            '^k'               # <Ctrl-k>: Kill
 bind-vim viins vicmd -- backward-kill-line   '^u'               # <Ctrl-u>: Kill previous part of the line
 
 # Undo/Redo
-bind-vim       vicmd -- undo 'u'  # <u>: Undo
-bind-vim viins vicmd -- redo '^r' # <Ctrl-r>: Redo
-bind-vim       vicmd -- redo 'U'  # <U>: Redo
+bind-vim vicmd -- undo 'u'      # <u>: Undo
+bind-vim vicmd -- redo 'U' '^r' # <Ctrl-r>: Redo
 
 ### Change mode
 bind-vim viins -- overwrite-mode "$terminf[kich1]" # <Insert>: Switch to overwrite mode TODO

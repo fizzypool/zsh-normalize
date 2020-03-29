@@ -79,7 +79,7 @@ TRAPWINCH() {
 ## Keybindings
 
 ### Navigation
-bind-vim viins vicmd -- beginning-of-line "\\C-a" "\\e[1~" # <Ctrl-a>|<Home>: Move to beginning of line
+bind-vim viins vicmd -- beginning-of-line "\\C-a" "\e[1~" # <Ctrl-a>|<Home>: Move to beginning of line
 bind-vim viins vicmd -- end-of-line       "\\C-e" "$terminfo[kend]"  # <Ctrl-e>|<End>:  Move to end of line
 bind-vim viins vicmd -- backward-char     "\\C-b"                    # <Ctrl-b>:        Move to previous character
 bind-vim viins vicmd -- forward-char      "\\C-f"                    # <Ctrl-f>:        Move to next character
@@ -87,9 +87,9 @@ bind-vim viins vicmd -- backward-word     "\\C-$terminfo[kcub1]"     # <Ctrl-Lef
 bind-vim viins vicmd -- forward-word      "\\C-$terminfo[kcuf1]"     # <Ctrl-Right>:    Move to next word
 
 ### History
-bind-vim viins vicmd         -- history-incremental-pattern-search-backward "\\C-S"                  # <Ctrl-r>: Search in history (backward)
+bind-vim viins vicmd         -- history-incremental-pattern-search-backward "\\C-?"                  # <Ctrl-r>: Search in history (backward)
 bind-vim       vicmd         -- history-incremental-pattern-search-backward "?"                      # <?>:      Search in history (backward)
-bind-vim viins vicmd         -- history-incremental-pattern-search-forward  "\\C-s"                  # <Ctrl-s>: Search in history (forward)
+bind-vim viins vicmd         -- history-incremental-pattern-search-forward  "\\C-/"                  # <Ctrl-s>: Search in history (forward)
 bind-vim       vicmd         -- history-incremental-pattern-search-forward  "/"                      # </>:      Search in history (forward)
 bind-vim viins vicmd isearch -- up-line-or-history                          "\\C-p" "$terminfo[kpp]" # <Ctrl-p>|PgUp:   Go up in history
 bind-vim viins vicmd isearch -- down-line-or-history                        "\\C-n" "$terminfo[knp]" # <Ctrl-n>|PgDown: Go up in history

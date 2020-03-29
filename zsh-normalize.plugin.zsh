@@ -55,10 +55,6 @@ unsetopt MAIL_WARNING                  # Don't print warn msg if a mail file has
 
 typeset -U path cdpath fpath manpath   # Automatically remove duplicates from these arrays
 
-## Sound
-
-setopt nobeep                          # Avoid beeping
-
 ## Completion
 
 autoload -Uz compinit && compinit -i   # Load and initialize the completion system ignoring insecure directories

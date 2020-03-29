@@ -77,7 +77,7 @@ TRAPWINCH() {
 ## Keybindings
 
 ### Navigation
-bind-vim viins vicmd -- beginning-of-line  "^a" "\e[1~"           # <Ctrl-a>|<Home>: Move to beginning of line TODO
+bind-vim viins vicmd -- beginning-of-line  "^a" '\e[1~'           # <Ctrl-a>|<Home>: Move to beginning of line TODO
 bind-vim viins vicmd -- end-of-line        "^e" "$terminfo[kend]" # <Ctrl-e>|<End>:  Move to end of line TODO
 bind-vim viins vicmd -- backward-word      "^b" "^[[1;5D"         # <Ctrl-Left>:     Move to previous word
 bind-vim viins vicmd -- forward-word       "^f" "^[[1;5C"         # <Ctrl-Right>:    Move to next word TODO
@@ -97,32 +97,32 @@ bind-vim             isearch -- self-insert                                 "." 
 
 ### Delete chars/words
 bind-vim viins vicmd -- delete-char          "$terminfo[kdch1]" # <Delete>: Delete next character
-bind-vim viins vicmd -- backward-delete-char "^h"               # <Ctrl-h>: Delete previous character
-bind-vim viins vicmd -- backward-kill-word   "^w"               # <Ctrl-w>: Delete previous word
-bind-vim viins vicmd -- kill-line            "^k"               # <Ctrl-k>: Kill next part of the line
-bind-vim viins vicmd -- backward-kill-line   "^u"               # <Ctrl-u>: Kill previous part of the line
+bind-vim viins vicmd -- backward-delete-char '^h'               # <Ctrl-h>: Delete previous character
+bind-vim viins vicmd -- backward-kill-word   '^w'               # <Ctrl-w>: Delete previous word
+bind-vim viins vicmd -- kill-line            '^k'               # <Ctrl-k>: Kill next part of the line
+bind-vim viins vicmd -- backward-kill-line   '^u'               # <Ctrl-u>: Kill previous part of the line
 
 # Undo/Redo
-bind-vim       vicmd -- undo "u"    # <u>: Undo
-bind-vim viins vicmd -- redo "^r" # <Ctrl-r>: Redo
-bind-vim       vicmd -- redo "U"    # <U>: Redo
+bind-vim       vicmd -- undo 'u'  # <u>: Undo
+bind-vim viins vicmd -- redo '^r' # <Ctrl-r>: Redo
+bind-vim       vicmd -- redo 'U'  # <U>: Redo
 
 ### Change mode
 bind-vim viins -- overwrite-mode "$terminf[kich1]" # <Insert>: Switch to overwrite mode TODO
 
 ### Change directory
-bind-vim viins -- expand-dot-to-parent-dir "." # Expand .... to ../..
+bind-vim viins -- expand-dot-to-parent-dir '.' # Expand .... to ../..
 
 ### Completion
 bind-vim viins -- reverse-menu-complete "$terminfo[kcbt]" # <Shift-Tab>: Go to the previous menu item
-bind-vim viins -- expand-cmd-path       "\\ee"            # <Esc-e>: Expand command name to full path
+bind-vim viins -- expand-cmd-path       '\ee'             # <Esc-e>: Expand command name to full path
 
 ### Tricks
-bind-vim vicmd -- edit-command-line    "v"    # <v>: Edit command in an external editor
-bind-vim viins -- prepend-sudo         "\\es" # <Esc-s>: Insert sudo at the beginning of the line
-bind-vim viins -- clear-screen         "^L"   # <Ctrl-l>: Clear screen
-bind-vim viins -- copy-prev-shell-word "\\em" # <Esc-m>: Duplicate the previous word
-bind-vim viins -- push-line-or-edit    "^q"   # <Ctrl-q>: Use a more flexible push-line
+bind-vim vicmd -- edit-command-line    'v'   # <v>: Edit command in an external editor
+bind-vim viins -- prepend-sudo         '\es' # <Esc-s>: Insert sudo at the beginning of the line
+bind-vim viins -- clear-screen         '^L'  # <Ctrl-l>: Clear screen
+bind-vim viins -- copy-prev-shell-word '\em' # <Esc-m>: Duplicate the previous word
+bind-vim viins -- push-line-or-edit    '^q'  # <Ctrl-q>: Use a more flexible push-line
 
 ### Surround (similar behavior to Vim surround plugin)
 for m in visual viopp; do

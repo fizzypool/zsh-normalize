@@ -79,8 +79,7 @@ TRAPWINCH() {
 ### Navigation
 bind-vim viins vicmd -- beginning-of-line  "^a" "\e[1~"           # <Ctrl-a>|<Home>: Move to beginning of line TODO
 bind-vim viins vicmd -- end-of-line        "^e" "$terminfo[kend]" # <Ctrl-e>|<End>:  Move to end of line TODO
-bind-vim viins vicmd -- backward-char      "^b"                   # <Ctrl-b>:        Move to previous character
-bind-vim viins vicmd -- backward-word      "^[[1;5D"              # <Ctrl-Left>:     Move to previous word
+bind-vim viins vicmd -- backward-word      "^b" "^[[1;5D"         # <Ctrl-Left>:     Move to previous word
 bind-vim viins vicmd -- forward-word       "^f" "^[[1;5C"         # <Ctrl-Right>:    Move to next word TODO
 bind-vim viins vicmd -- autosuggest-accept "^ "                   # <Ctrl-Space>:    Autosuggest accept TODO
 

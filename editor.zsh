@@ -53,8 +53,6 @@ function prepend-sudo {
 }
 zle -N prepend-sudo
 
-################################################################################
-
 ## General
 
 # Allow usage of $terminfo

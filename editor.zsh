@@ -51,32 +51,32 @@ TRAPWINCH() {
 
 bindkey '\C-r' history-incremental-pattern-search-backward # <Ctrl-r>: Search in history (backward)
 bindkey '\C-s' history-incremental-pattern-search-forward  # <Ctrl-s>: Search in history (forward)
-bindkey '\C-p' up-history       # <Ctrl-P>: Go up in history (allow to navigate in search)
-bindkey '\C-n' down-history     # <Ctrl-N>: Go up in history (allow to navigate in search)
-bindkey '\C-a' beginning-of-line # <Ctrl-a>: Move to beginning of line
-bindkey '\C-e' end-of-line       # <Ctrl-e>: Move to end of line
-
-# TODO
-# allow ctrl-h, ctrl-w, ctrl-? for char and word deletion (standard behaviour)
-#bindkey '^?' backward-delete-char
-#bindkey '^h' backward-delete-char
-#bindkey '^w' backward-kill-word
+bindkey '\C-p' up-history                                  # <Ctrl-P>: Go up in history (allow to navigate in search)
+bindkey '\C-n' down-history                                # <Ctrl-N>: Go up in history (allow to navigate in search)
+bindkey '\C-a' beginning-of-line                           # <Ctrl-a>: Move to beginning of line
+bindkey '\C-e' end-of-line                                 # <Ctrl-e>: Move to end of line
+bindkey '\C-h' backward-delete-char                        # <Ctrl-h>: Delete previous character
+bindkey '\C-w' backward-kill-word                          # <Ctrl-w>: Delete previous word
 
 ### Command mode
 
-bindkey -M vicmd 'v'    edit-command-line                  # <v>: Edit command in an external editor
-bindkey -M vicmd 'u'    undo                               # <u>: Undo
-bindkey -M vicmd '\C-R' redo                               # <Ctrl-r>: Redo 
-bindkey -M vicmd "?" history-incremental-pattern-search-backward
-bindkey -M vicmd "/" history-incremental-pattern-search-forward
+bindkey -M vicmd 'v'    edit-command-line                           # <v>: Edit command in an external editor
+bindkey -M vicmd 'u'    undo                                        # <u>: Undo
+bindkey -M vicmd '\C-R' redo                                        # <Ctrl-r>: Redo 
+bindkey -M vicmd '?'    history-incremental-pattern-search-backward
+bindkey -M vicmd '/'    history-incremental-pattern-search-forward
 
 ### Insert mode
 
 bindkey -M viins '.'               expand-dot-to-parent-dir # Expand .... to ../..
-bindkey -M viins '\C-X\C-S'        prepend-sudo             # <Ctrl-x Ctrl-s>: Insert sudo at the beginning of the line
+
+bindkey -M viins '\e-s'            prepend-sudo             # <Esc-s>: Insert sudo at the beginning of the line
 bindkey -M viins "$terminfo[kcbt]" reverse-menu-complete    # <Shift-Tab>: Go to the previous menu item
 bindkey -M viins ' '               magic-space              # <Space>: Expand history on space (http://zsh.sourceforge.net/Doc/Release/Expansion.html#History-Expansion)
 bindkey -M viins '\C-L'            clear-screen             # <Ctrl-l>: Clear screen
+bindkey -M viins '\e-e'            expand-cmd-path          # <Esc-e>: Expand command name to full path
+bindkey -M viins '\e-m'            copy-prev-shell-word     # <Esc-m>: Duplicate the previous word
+bindkey -M viins '\C-q'            push-line-or-edit        # <Ctrl-q>: Use a more flexible push-line
 
 ### Incremental-search mode
 

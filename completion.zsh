@@ -16,6 +16,10 @@ unsetopt FLOW_CONTROL                  # Disable start/stop characters in shell 
 
 ## Styles
 
+# Use caching to make completion for commands such as dpkg and apt usable
+zstyle ':completion::complete:*' use-cache on
+zstyle ':completion::complete:*' cache-path "${ZDOTDIR:-$HOME}/.zcompcache"
+
 # Case-insensitive (all), partial-word, and then substring completion
 if zstyle -t ':custom:module:completion:*' case-sensitive; then
   zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
@@ -24,10 +28,6 @@ else
   zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
   unsetopt CASE_GLOB
 fi
-
-# Use caching to make completion for commands such as dpkg and apt usable
-zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path "${ZDOTDIR:-$HOME}/.zcompcache"
 
 # Group matches and describe
 zstyle ':completion:*:*:*:*:*' menu select
@@ -42,6 +42,13 @@ zstyle ':completion:*:default' list-prompt '%S%M matches%s'
 zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' verbose yes
+
+# Fuzzy match mistyped completions.
+zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
+# Increase the number of errors based on the length of the typed word.
+zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
 
 # Don't complete unavailable commands
 zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'

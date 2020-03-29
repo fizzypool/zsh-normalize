@@ -1,8 +1,7 @@
-if [[ "${TERM}" == 'dumb' ]]; then return 1; fi  # Return if requirements are not found
-
 ## Terminfo
 
-zmodload zsh/terminfo                            # Use human-friendly identifiers
+# Use human-friendly identifiers
+zmodload zsh/terminfo
 typeset -gA key_info
 key_info=(
   'Control'      '\C-'
@@ -36,7 +35,8 @@ key_info=(
   'BackTab'      "$terminfo[kcbt]"
 )
 
-for key in "${(k)key_info[@]}"; do               # Set empty $key_info values to an invalid UTF-8 sequence to induce silent bindkey failure
+# Set empty $key_info values to an invalid UTF-8 sequence to induce silent bindkey failure
+for key in "${(k)key_info[@]}"; do
   if [[ -z "$key_info[$key]" ]]; then
     key_info[$key]='�'
   fi
@@ -44,9 +44,19 @@ done
 
 ## General
 
-WORDCHARS='*?_-.[]~&;!#$%^(){}<>'                # Treat these characters as part of a word
+# Enable Vim keybindings
+bindkey -v
 
-autoload -Uz edit-command-line                   # Allow command line editing in an external editor
+# Don't wait too long after <Esc> to see if it's an arrow / function key
+# Warning: Setting this too low can break some zsh functionality, eg:
+#     https://github.com/zsh-users/zsh-autosuggestions/issues/254#issuecomment-345175735
+export KEYTIMEOUT=30
+
+# Treat these characters as part of a word
+WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
+
+# Allow command line editing in an external editor
+autoload -Uz edit-command-line
 zle -N edit-command-line
 
 # }}}

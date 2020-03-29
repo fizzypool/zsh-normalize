@@ -1,15 +1,8 @@
-# Return if requirements are not found
-if [[ "${TERM}" == 'dumb' ]]; then
-  return 1
-fi
+if [[ "${TERM}" == 'dumb' ]]; then return 1; fi  # Return if requirements are not found
 
-# {{{ Variables.
+## Terminfo
 
-# Treat these characters as part of a word.
-WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
-
-# Use human-friendly identifiers.
-zmodload zsh/terminfo
+zmodload zsh/terminfo                            # Use human-friendly identifiers
 typeset -gA key_info
 key_info=(
   'Control'      '\C-'
@@ -43,20 +36,17 @@ key_info=(
   'BackTab'      "$terminfo[kcbt]"
 )
 
-# Set empty $key_info values to an invalid UTF-8 sequence to induce silent
-# bindkey failure.
-for key in "${(k)key_info[@]}"; do
+for key in "${(k)key_info[@]}"; do               # Set empty $key_info values to an invalid UTF-8 sequence to induce silent bindkey failure
   if [[ -z "$key_info[$key]" ]]; then
     key_info[$key]='�'
   fi
 done
 
-# }}}
+## General
 
-# {{{ External editor.
+WORDCHARS='*?_-.[]~&;!#$%^(){}<>'                # Treat these characters as part of a word
 
-# Allow command line editing in an external editor.
-autoload -Uz edit-command-line
+autoload -Uz edit-command-line                   # Allow command line editing in an external editor
 zle -N edit-command-line
 
 # }}}
@@ -300,7 +290,7 @@ if zstyle -t ':editor' dot-expansion; then
   bindkey -M isearch . self-insert 2> /dev/null
 fi
 
-# {{{ Layout.
+## Layout
 
 # Set the key layout.
 zstyle -s ':editor' key-bindings 'key_bindings'
@@ -311,7 +301,5 @@ elif [[ "$key_bindings" == vi ]]; then
 else
   print "editor: invalid key bindings: $key_bindings" >&2
 fi
-
-# }}}
 
 unset key{,map,bindings}

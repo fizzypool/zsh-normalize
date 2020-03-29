@@ -21,7 +21,7 @@ function bind-vim () {
 
   for hotkey in ${hotkeys}; do
     for map in ${maps}; do
-      echo bindkey -M "$map" "$hotkey" "$cmd"
+      bindkey -M "$map" "$hotkey" "$cmd"
     done
   done
 }

@@ -36,8 +36,7 @@ bindkey -v
 WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
 
 # Don't wait too long after <Esc> to see if it's an arrow / function key
-# Warning: Setting this too low can break some zsh functionality,
-#          eg: https://github.com/zsh-users/zsh-autosuggestions/issues/254#issuecomment-345175735
+# Warning: Setting this too low can break some zsh functionality, eg: https://github.com/zsh-users/zsh-autosuggestions/issues/254#issuecomment-345175735
 export KEYTIMEOUT=30
 
 # Ensure that the prompt is redrawn when the terminal size changes.

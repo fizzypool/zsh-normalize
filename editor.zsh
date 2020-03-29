@@ -87,7 +87,7 @@ bind-vim viins vicmd -- backward-word     "^[[1;5D"               # <Ctrl-Left>:
 bind-vim viins vicmd -- forward-word      "^[[1;5C"               # <Ctrl-Right>:    Move to next word
 
 ### History
-bind-vim viins vicmd         -- history-incremental-pattern-search-backward "^r"                  # <Ctrl-r>: Search in history (backward)
+bind-vim viins vicmd         -- history-incremental-pattern-search-backward "^r"                  # <Ctrl-r>: Search in history (backward) TODO
 bind-vim       vicmd         -- history-incremental-pattern-search-backward "?"                      # <?>:      Search in history (backward)
 bind-vim viins vicmd         -- history-incremental-pattern-search-forward  "^s"                  # <Ctrl-s>: Search in history (forward)
 bind-vim       vicmd         -- history-incremental-pattern-search-forward  "/"                      # </>:      Search in history (forward)
@@ -109,14 +109,14 @@ bind-vim viins vicmd -- redo "^r" # <Ctrl-r>: Redo
 bind-vim       vicmd -- redo "U"    # <U>: Redo
 
 ### Change mode
-bind-vim viins -- overwrite-mode "$terminf[kich1]" # <Insert>: Switch to overwrite mode
+bind-vim viins -- overwrite-mode "$terminf[kich1]" # <Insert>: Switch to overwrite mode TODO
 
 ### Change directory
 bind-vim viins -- expand-dot-to-parent-dir "." # Expand .... to ../..
 
 ### Completion
 bind-vim viins -- reverse-menu-complete "$terminfo[kcbt]" # <Shift-Tab>: Go to the previous menu item
-bind-vim viins -- expand-cmd-path       "\\e-e"           # <Esc-e>: Expand command name to full path
+bind-vim viins -- expand-cmd-path       '\ee'           # <Esc-e>: Expand command name to full path
 
 ### Tricks
 bind-vim vicmd -- edit-command-line    "v"     # <v>: Edit command in an external editor

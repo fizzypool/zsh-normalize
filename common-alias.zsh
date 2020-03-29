@@ -1,3 +1,12 @@
+## Open
+
+# <O>: Open file with default application
+if [[ $OSTYPE == darwin* ]]; then
+  abbrev-alias O="open"
+elif [[ $OSTYPE == linux* ]]; then
+  abbrev-alias O="xdg-open"
+fi
+
 ## Edit
 
 # <E>: Edit

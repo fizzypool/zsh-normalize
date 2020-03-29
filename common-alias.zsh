@@ -10,10 +10,10 @@ fi
 ## Edit
 
 # <E>: Edit
-abbrev-alias -f E='printf "$(realpath --relative-to=/usr/bin $(which ${EDITOR:-vim}))"'
+abbrev-alias -e E='printf "$(realpath --relative-to=/usr/bin $(which ${EDITOR:-vim}))"'
 
 # <EE>: Edit as super user
-abbrev-alias -f EE='printf "sudo $(realpath --relative-to=/usr/bin $(which ${EDITOR-vim}))"'
+abbrev-alias -e EE='printf "sudo $(realpath --relative-to=/usr/bin $(which ${EDITOR-vim}))"'
 
 ## Clipboard
 

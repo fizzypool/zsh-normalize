@@ -1,13 +1,17 @@
-# Built-in readlink in OSX doesn't work: the coreutils version is needed.
+# Zsh Normalization: Main Plugin.
+
+## Init.
+
+### Built-in readlink in OSX doesn't work: the coreutils version is needed.
 if [[ uname == 'Darwin' ]]; then
   readlink_cmd=greadlink
 else
   readlink_cmd=readlink
 fi
+
 base_dir=$(dirname $(eval $readlink_cmd -f ${(%):-%N}))
 
-
-## Prompt
+## Prompt.
 
 setopt PROMPT_SUBST                    # Allow expansion in prompts
 setopt INTERACTIVECOMMENTS             # Allow use of comments in interactive code (initial `#` causes that line to be ignored)
@@ -15,7 +19,7 @@ setopt INTERACTIVECOMMENTS             # Allow use of comments in interactive co
 autoload -Uz url-quote-magic           # Smart URLs
 zle -N self-insert url-quote-magic
 
-## Globbing/Matching
+## Globbing/Matching.
 
 setopt EXTENDED_GLOB                   # Treat the '#', '~' and '^' characters as part of patterns for filename generation
 setopt NO_GLOBDOTS                     # * shouldn't match dotfiles. ever
@@ -23,7 +27,7 @@ setopt RC_QUOTES                       # Allow 'Henry''s Garage' instead of 'Hen
 setopt BRACE_CCL                       # Allow brace character class list expansion
 setopt COMBINING_CHARS                 # Combine 0-length punctuation chars with the base char
 
-## Directory
+## Directory.
 
 setopt   AUTO_CD                       # Auto changes to a directory without typing cd
 setopt   AUTO_PUSHD                    # Push the old directory onto the stack on cd
@@ -36,41 +40,30 @@ setopt   MULTIOS                       # Write to multiple descriptors
 setopt   EXTENDED_GLOB                 # Use extended globbing syntax
 unsetopt CLOBBER                       # Do not overwrite existing files with > and >> use >! and >>! to bypass
 
-## Jobs
+## Jobs.
 
 setopt   NOTIFY                        # Report the status of backgrounds jobs immediately
 setopt   LONG_LIST_JOBS                # Display PID when suspending processes as well
 setopt   AUTO_RESUME                   # Try to resume existing job before creating a new proc
 unsetopt BG_NICE                       # Don't run all background jobs at a lower priority
 
-## I/O
+## I/O.
 
 setopt NO_FLOW_CONTROL                 # No <c-s>/<c-q> output freezing
 
-## Mail
+## Mail.
 
 unsetopt MAIL_WARNING                  # Don't print warn msg if a mail file has been accessed
 
-## Environment variables
+## Environment variables.
 
 typeset -U path cdpath fpath manpath   # Automatically remove duplicates from these arrays
 
-## Completion
+## Sound.
 
-autoload -Uz compinit && compinit -i   # Load and initialize the completion system ignoring insecure directories
+setopt nobeep                          # Avoid beeping
 
-setopt   NO_NOMATCH                    # Try to avoid the 'zsh: no matches found...'
-setopt   HASH_LIST_ALL                 # Whenever a command completion is attempted, make sure the entire command path is hashed first
-setopt   COMPLETE_IN_WORD              # Complete not just at the end
-setopt   ALWAYS_TO_END                 # Move cursor to the end of a completed word
-setopt   PATH_DIRS                     # Perform path search even on cmd names with slashes
-setopt   AUTO_MENU                     # Show completion menu on a succesive tab press
-setopt   AUTO_LIST                     # Automatically list choices on ambiguous completion
-setopt   AUTO_PARAM_SLASH              # If completed param is a dir, add a trailing slash
-unsetopt MENU_COMPLETE                 # Do not autoselect the first completion entry
-unsetopt FLOW_CONTROL                  # Disable start/stop characters in shell editor
-
-## History
+## History.
 
 HISTFILE="${ZDOTDIR:-$HOME}/.zhistory" # The path to the history file
 HISTSIZE=500000                        # The maximum number of events to save in the internal history
@@ -89,14 +82,18 @@ setopt HIST_SAVE_NO_DUPS               # Don't write a duplicate event to the hi
 setopt HIST_VERIFY                     # Don't execute immediately upon history expansion
 setopt HIST_BEEP                       # Beep when accessing non-existent history
 
-## Common alias
+## Common alias.
 
 source "${base_dir}/common-alias.zsh"  # Load some common aliases
 
-## Editor
+## Completion.
+
+source "${base_dir}/completion.zsh"
+
+## Editor.
 
 source "${base_dir}/editor.zsh"        # Load editor configuration
 
+## Cleanup.
 
-## Cleanup
 unset base_dir

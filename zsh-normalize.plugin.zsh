@@ -1,33 +1,56 @@
-# no c-s/c-q output freezing
-setopt noflowcontrol
+## History
 
-# allow expansion in prompts
-setopt prompt_subst
-
-# this is default, but set for share_history
+# This is default, but set for share_history
 setopt append_history
 
-# save each command's beginning timestamp and the duration to the history file
+# Save each command's beginning timestamp and the duration to the history file
 setopt extended_history
 
-# display PID when suspending processes as well
-setopt longlistjobs
+## Prompt
 
-# try to avoid the 'zsh: no matches found...'
+# Allow expansion in prompts
+setopt prompt_subst
+
+# Allow use of comments in interactive code (initial `#` causes that line to be ignored)
+setopt interactivecomments
+
+## Completion
+
+# Try to avoid the 'zsh: no matches found...'
 setopt nonomatch
 
-# report the status of backgrounds jobs immediately
-setopt notify
-
-# whenever a command completion is attempted, make sure the entire command path
-# is hashed first.
+# Whenever a command completion is attempted, make sure the entire command path is hashed first.
 setopt hash_list_all
 
-# not just at the end
+# Complete not just at the end
 setopt completeinword
+
+## Jobs
+
+# Report the status of backgrounds jobs immediately
+setopt notify
+
+# Display PID when suspending processes as well
+setopt longlistjobs
+
+## Misc
+
+## ASD
+
+# No <c-s>/<c-q> output freezing
+setopt noflowcontrol
 
 # use zsh style word splitting
 setopt noshwordsplit
 
-# allow use of comments in interactive code
-setopt interactivecomments
+# Allow brace character class list expansion.
+setopt brace_ccl
+
+ # Combine 0-length punctuation chars with the base char
+setopt combining_chars
+
+ # Allow 'Henry''s Garage' instead of 'Henry'\''s Garage'.
+setopt RC_QUOTES
+
+ # Don't print warn msg if a mail file has been accessed.
+unsetopt MAIL_WARNING

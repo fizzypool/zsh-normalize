@@ -97,6 +97,10 @@ setopt HIST_BEEP                       # Beep when accessing non-existent histor
 
 source "${base_dir}/common-alias.zsh"  # Load some common aliases
 
+## Editor
+
+source "${base_dir}/editor.zsh"        # Load editor configuration
+
 
 ## Cleanup
 unset base_dir

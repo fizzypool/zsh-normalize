@@ -26,6 +26,23 @@ function bind-vim () {
   done
 }
 
+## Init
+
+# Allow usage of $terminfo
+zmodload zsh/terminfo
+
+# Make sure the terminal is in application mode, when zle is # active.
+if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
+  function zle-line-init () {
+    printf '%s' "${terminfo[smkx]}"
+  }
+  zle -N zle-line-init
+  function zle-line-finish () {
+    printf '%s' "${terminfo[rmkx]}"
+  }
+  zle -N zle-line-finish
+fi
+
 ## Load/define Widgets
 
 # Load pre-existing widgets
@@ -55,9 +72,6 @@ zle -N prepend-sudo
 
 ## General
 
-# Allow usage of $terminfo
-zmodload zsh/terminfo
-
 # Enable Vim keybindings
 bindkey -v
 
@@ -84,16 +98,16 @@ bind-vim viins vicmd -- forward-word       '^f' '^[[1;5C' # <Ctrl-Right>:    Mov
 bind-vim viins vicmd -- autosuggest-accept '^ '           # <Ctrl-Space>:    Autosuggest accept
 
 ### History
-bind-vim viins vicmd         -- history-incremental-pattern-search-backward "^r"                  # <Ctrl-r>: Search in history (backward) TODO
-bind-vim       vicmd         -- history-incremental-pattern-search-backward "?"                   # <?>:      Search in history (backward)
-bind-vim viins vicmd         -- history-incremental-pattern-search-forward  "^s"                  # <Ctrl-s>: Search in history (forward)
-bind-vim       vicmd         -- history-incremental-pattern-search-forward  "/"                   # </>:      Search in history (forward)
-bind-vim viins vicmd isearch -- history-substring-search-up                 "^p" "$terminfo[kpp]" # <Ctrl-p>|<PgUp>:   Go up in history
-bind-vim       vicmd         -- history-substring-search-up                 "k"                   # <k>:               Go up in history
-bind-vim viins vicmd isearch -- history-substring-search-down               "^n" "$terminfo[knp]" # <Ctrl-n>|<PgDown>: Go down in history
-bind-vim       vicmd         -- history-substring-search-down               "j"                   # <j>:               Go down in history
-bind-vim viins               -- magic-space                                 " "                   # <Space>: Expand history on space
-bind-vim             isearch -- self-insert                                 "." 2> /dev/null      # Do not expand .... to ../.. during incremental search
+bind-vim viins vicmd         -- history-incremental-pattern-search-backward '^r'                  # <Ctrl-r>: Search in history (backward) TODO
+bind-vim       vicmd         -- history-incremental-pattern-search-backward '?'                   # <?>:      Search in history (backward)
+bind-vim viins vicmd         -- history-incremental-pattern-search-forward  '^s'                  # <Ctrl-s>: Search in history (forward)
+bind-vim       vicmd         -- history-incremental-pattern-search-forward  '/'                   # </>:      Search in history (forward)
+bind-vim viins vicmd isearch -- history-substring-search-up                 '^p' "$terminfo[kpp]" # <Ctrl-p>|<PgUp>:   Go up in history
+bind-vim       vicmd         -- history-substring-search-up                 'k'                   # <k>:               Go up in history
+bind-vim viins vicmd isearch -- history-substring-search-down               '^n' "$terminfo[knp]" # <Ctrl-n>|<PgDown>: Go down in history
+bind-vim       vicmd         -- history-substring-search-down               'j'                   # <j>:               Go down in history
+bind-vim viins               -- magic-space                                 ' '                   # <Space>: Expand history on space
+bind-vim             isearch -- self-insert                                 '.' 2> /dev/null      # Do not expand .... to ../.. during incremental search
 
 ### Delete chars/words
 bind-vim viins vicmd -- delete-char          "$terminfo[kdch1]" # <Delete>: Delete next character

@@ -18,7 +18,6 @@ function bind-vim () {
     hotkeys+="$1"
     shift
   done
-  shift
 
   for hotkey in ${hotkeys}; do
     for map in ${maps}; do

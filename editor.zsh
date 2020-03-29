@@ -29,7 +29,7 @@ function bind-vim () {
 ## Load/define Widgets
 
 # Load pre-existing widgets
-autoload -Uz edit-command-line; zle -N edit-command-line
+autoload -U edit-command-line; zle -N edit-command-line
 autoload -U select-bracketed; zle -N select-bracketed
 autoload -U select-quoted; zle -N select-quoted
 autoload -Uz surround; zle -N delete-surround surround; zle -N change-surround surround; zle -N add-surround surround

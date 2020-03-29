@@ -138,19 +138,24 @@ bind-vim viins -- copy-prev-shell-word '\em' # <Esc-m>: Duplicate the previous w
 bind-vim viins -- push-line-or-edit    '^q'  # <Ctrl-q>: Use a more flexible push-line
 
 ### Surround (similar behavior to Vim surround plugin)
-for m in visual viopp; do
-  for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
-    bind-vim $m -- select-bracketed $c
-  done
-done
-
-for m in visual viopp; do
-  for c in {a,i}{\',\",\`}; do
-    bind-vim $m -- select-quoted "$c"
-  done
-done
-
-bind-vim vicmd  -- change-surround "cs"
-bind-vim vicmd  -- delete-surround "ds"
-bind-vim vicmd  -- add-surround    "ys"
-bind-vim visual -- add-surround    "S"
+bindkey -a cs change-surround
+bindkey -a ds delete-surround
+bindkey -a ys add-surround
+bindkey -M visual S add-surround
+#
+#for m in visual viopp; do
+#  for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
+#    bind-vim $m -- select-bracketed $c
+#  done
+#done
+#
+#for m in visual viopp; do
+#  for c in {a,i}{\',\",\`}; do
+#    bind-vim $m -- select-quoted "$c"
+#  done
+#done
+#
+#bind-vim vicmd  -- change-surround "cs"
+#bind-vim vicmd  -- delete-surround "ds"
+#bind-vim vicmd  -- add-surround    "ys"
+#bind-vim visual -- add-surround    "S"

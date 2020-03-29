@@ -100,7 +100,7 @@ bind-vim             isearch -- self-insert                                 "." 
 bind-vim viins vicmd -- delete-char          "$terminfo[kdch1]" # <Delete>: Delete next character
 bind-vim viins vicmd -- backward-delete-char "\\C-h"            # <Ctrl-h>: Delete previous character
 bind-vim viins vicmd -- backward-kill-word   "\\C-w"            # <Ctrl-w>: Delete previous word
-bind-vim viins vicmd -- kill-line            "\\C-k"            # <Ctrl-k>: Kill line
+bind-vim viins vicmd -- kill-line            "\\C-k"            # <Ctrl-k>: Kill next part of the line
 bind-vim viins vicmd -- backward-kill-line   "\\C-u"            # <Ctrl-u>: Kill previous part of the line
 
 # Undo/Redo

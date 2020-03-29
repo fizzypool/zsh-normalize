@@ -38,5 +38,8 @@ abbrev-alias -g LL="2>&1 | less -r"
 
 ## Mute output
 
+# <N>: Redirect stdout to /dev/null
 abbrev-alias -g N="> /dev/null"
+
+# <NN>: Redirect stdout and stderr to /dev/null
 abbrev-alias -g NN="2>&1 > /dev/null"

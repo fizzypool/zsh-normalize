@@ -88,13 +88,13 @@ bind-vim viins vicmd -- forward-word      "\\C-$terminfo[kcuf1]"     # <Ctrl-Rig
 
 ### History
 bind-vim viins vicmd         -- history-incremental-pattern-search-backward "\\C-S"                  # <Ctrl-r>: Search in history (backward)
-bind-vim       vicmd         -- history-incremental-pattern-search-backward "?"                     # <?>:      Search in history (backward)
+bind-vim       vicmd         -- history-incremental-pattern-search-backward "?"                      # <?>:      Search in history (backward)
 bind-vim viins vicmd         -- history-incremental-pattern-search-forward  "\\C-s"                  # <Ctrl-s>: Search in history (forward)
-bind-vim       vicmd         -- history-incremental-pattern-search-forward  "/"                     # </>:      Search in history (forward)
+bind-vim       vicmd         -- history-incremental-pattern-search-forward  "/"                      # </>:      Search in history (forward)
 bind-vim viins vicmd isearch -- up-line-or-history                          "\\C-p" "$terminfo[kpp]" # <Ctrl-p>|PgUp:   Go up in history
 bind-vim viins vicmd isearch -- down-line-or-history                        "\\C-n" "$terminfo[knp]" # <Ctrl-n>|PgDown: Go up in history
-bind-vim viins               -- magic-space                                 " "                     # <Space>: Expand history on space
-bind-vim             isearch -- self-insert                                 "." 2> /dev/null        # Do not expand .... to ../.. during incremental search
+bind-vim viins               -- magic-space                                 " "                      # <Space>: Expand history on space
+bind-vim             isearch -- self-insert                                 "." 2> /dev/null         # Do not expand .... to ../.. during incremental search
 
 ### Delete chars/words
 bind-vim viins vicmd -- delete-char          "$terminfo[kdch1]" # <Delete>: Delete next character

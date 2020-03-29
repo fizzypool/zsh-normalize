@@ -29,7 +29,7 @@ function bind-vim () {
 ## Load/define Widgets
 
 # Load pre-existing widgets
-autoload -U edit-command-line; zle -N edit-command-line
+autoload -Uz edit-command-line; zle -N edit-command-line
 autoload -U select-bracketed; zle -N select-bracketed
 autoload -U select-quoted; zle -N select-quoted
 autoload -Uz surround; zle -N delete-surround surround; zle -N change-surround surround; zle -N add-surround surround
@@ -77,29 +77,31 @@ TRAPWINCH() {
 ## Keybindings
 
 ### Navigation
-bind-vim viins vicmd -- beginning-of-line "^a" "\e[1~"            # <Ctrl-a>|<Home>: Move to beginning of line TODO
-bind-vim viins vicmd -- end-of-line       "^e" "$terminfo[kend]"  # <Ctrl-e>|<End>:  Move to end of line TODO
-bind-vim viins vicmd -- backward-char     "^b"                    # <Ctrl-b>:        Move to previous character
-bind-vim viins vicmd -- forward-char      "^f"                    # <Ctrl-f>:        Move to next character
-bind-vim viins vicmd -- backward-word     "^[[1;5D"               # <Ctrl-Left>:     Move to previous word
-bind-vim viins vicmd -- forward-word      "^[[1;5C"               # <Ctrl-Right>:    Move to next word
+bind-vim viins vicmd -- beginning-of-line  "^a" "\e[1~"           # <Ctrl-a>|<Home>: Move to beginning of line TODO
+bind-vim viins vicmd -- end-of-line        "^e" "$terminfo[kend]" # <Ctrl-e>|<End>:  Move to end of line TODO
+bind-vim viins vicmd -- backward-char      "^b"                   # <Ctrl-b>:        Move to previous character
+bind-vim viins vicmd -- backward-word      "^[[1;5D"              # <Ctrl-Left>:     Move to previous word
+bind-vim viins vicmd -- forward-word       "^f" "^[[1;5C"         # <Ctrl-Right>:    Move to next word TODO
+bind-vim viins vicmd -- autosuggest-accept "^ "                   # <Ctrl-Space>:    Autosuggest accept TODO
 
 ### History
 bind-vim viins vicmd         -- history-incremental-pattern-search-backward "^r"                  # <Ctrl-r>: Search in history (backward) TODO
-bind-vim       vicmd         -- history-incremental-pattern-search-backward "?"                      # <?>:      Search in history (backward)
+bind-vim       vicmd         -- history-incremental-pattern-search-backward "?"                   # <?>:      Search in history (backward)
 bind-vim viins vicmd         -- history-incremental-pattern-search-forward  "^s"                  # <Ctrl-s>: Search in history (forward)
-bind-vim       vicmd         -- history-incremental-pattern-search-forward  "/"                      # </>:      Search in history (forward)
-bind-vim viins vicmd isearch -- up-line-or-history                          "^p" "$terminfo[kpp]" # <Ctrl-p>|PgUp:   Go up in history
-bind-vim viins vicmd isearch -- down-line-or-history                        "^n" "$terminfo[knp]" # <Ctrl-n>|PgDown: Go up in history
-bind-vim viins               -- magic-space                                 " "                      # <Space>: Expand history on space
-bind-vim             isearch -- self-insert                                 "." 2> /dev/null         # Do not expand .... to ../.. during incremental search
+bind-vim       vicmd         -- history-incremental-pattern-search-forward  "/"                   # </>:      Search in history (forward)
+bind-vim viins vicmd isearch -- history-substring-search-up                 "^p" "$terminfo[kpp]" # <Ctrl-p>|<PgUp>:   Go up in history
+bind-vim       vicmd         -- history-substring-search-up                 "k"                   # <k>:               Go up in history
+bind-vim viins vicmd isearch -- history-substring-search-down               "^n" "$terminfo[knp]" # <Ctrl-n>|<PgDown>: Go down in history
+bind-vim       vicmd         -- history-substring-search-down               "j"                   # <j>:               Go down in history
+bind-vim viins               -- magic-space                                 " "                   # <Space>: Expand history on space
+bind-vim             isearch -- self-insert                                 "." 2> /dev/null      # Do not expand .... to ../.. during incremental search
 
 ### Delete chars/words
 bind-vim viins vicmd -- delete-char          "$terminfo[kdch1]" # <Delete>: Delete next character
-bind-vim viins vicmd -- backward-delete-char "^h"            # <Ctrl-h>: Delete previous character
-bind-vim viins vicmd -- backward-kill-word   "^w"            # <Ctrl-w>: Delete previous word
-bind-vim viins vicmd -- kill-line            "^k"            # <Ctrl-k>: Kill next part of the line
-bind-vim viins vicmd -- backward-kill-line   "^u"            # <Ctrl-u>: Kill previous part of the line
+bind-vim viins vicmd -- backward-delete-char "^h"               # <Ctrl-h>: Delete previous character
+bind-vim viins vicmd -- backward-kill-word   "^w"               # <Ctrl-w>: Delete previous word
+bind-vim viins vicmd -- kill-line            "^k"               # <Ctrl-k>: Kill next part of the line
+bind-vim viins vicmd -- backward-kill-line   "^u"               # <Ctrl-u>: Kill previous part of the line
 
 # Undo/Redo
 bind-vim       vicmd -- undo "u"    # <u>: Undo

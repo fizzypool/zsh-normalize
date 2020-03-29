@@ -1,7 +1,39 @@
+## Utility functions
+
+# Define a bindkey for vi-mode
+function bind-vim () {
+  local -a maps
+  while (( $# )); do
+    [[ "$1" = '--' ]] && break
+    maps+="$1"
+    shift
+  done
+  shift
+
+  local cmd="$1"
+  shift
+
+  local -a hotkeys
+  while (( $# )); do
+    hotkeys+="$1"
+    shift
+  done
+  shift
+
+  for hotkey in ${hotkeys}; do
+    for map in ${maps}; do
+      echo bindkey -M "$map" "$hotkey" "$cmd"
+    done
+  done
+}
+
 ## Load/define Widgets
 
 # Load pre-existing widgets
 autoload -Uz edit-command-line; zle -N edit-command-line
+autoload -U select-bracketed; zle -N select-bracketed
+autoload -U select-quoted; zle -N select-quoted
+autoload -Uz surround; zle -N delete-surround surround; zle -N change-surround surround; zle -N add-surround surround
 
 # Define widget to expand .... to ../..
 function expand-dot-to-parent-dir {
@@ -36,7 +68,8 @@ bindkey -v
 WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
 
 # Don't wait too long after <Esc> to see if it's an arrow / function key
-# Warning: Setting this too low can break some zsh functionality, eg: https://github.com/zsh-users/zsh-autosuggestions/issues/254#issuecomment-345175735
+# Warning: Setting this too low can break some zsh functionality,
+#          eg: https://github.com/zsh-users/zsh-autosuggestions/issues/254#issuecomment-345175735
 export KEYTIMEOUT=30
 
 # Ensure that the prompt is redrawn when the terminal size changes.
@@ -46,48 +79,67 @@ TRAPWINCH() {
 
 ## Keybindings
 
-### All modes
+### Navigation
+bind-vim viins vicmd -- beginning-of-line "\C-a" "$terminfo[khome]" # <Ctrl-a>|<Home>: Move to beginning of line
+bind-vim viins vicmd -- end-of-line       "\C-e" "$terminfo[kend]"  # <Ctrl-e>|<End>:  Move to end of line
+bind-vim viins vicmd -- backward-char     "\C-b"                    # <Ctrl-b>:        Move to previous character
+bind-vim viins vicmd -- forward-char      "\C-f"                    # <Ctrl-f>:        Move to next character
+bind-vim viins vicmd -- backward-word     "\C-$terminfo[kcub1]"     # <Ctrl-Left>:     Move to previous word
+bind-vim viins vicmd -- forward-word      "\C-$terminfo[kcuf1]"     # <Ctrl-Right>:    Move to next word
 
-bindkey '\C-r' history-incremental-pattern-search-backward # <Ctrl-r>: Search in history (backward)
-bindkey '\C-s' history-incremental-pattern-search-forward  # <Ctrl-s>: Search in history (forward)
-bindkey '\C-p' up-history                                  # <Ctrl-P>: Go up in history (allow to navigate in search)
-bindkey '\C-n' down-history                                # <Ctrl-N>: Go up in history (allow to navigate in search)
-bindkey '\C-a' beginning-of-line                           # <Ctrl-a>: Move to beginning of line
-bindkey '\C-e' end-of-line                                 # <Ctrl-e>: Move to end of line
-bindkey '\C-h' backward-delete-char                        # <Ctrl-h>: Delete previous character
-bindkey '\C-w' backward-kill-word                          # <Ctrl-w>: Delete previous word
+### History
+bind-vim viins vicmd         -- history-incremental-pattern-search-backward "\C-S"                  # <Ctrl-r>: Search in history (backward)
+bind-vim       vicmd         -- history-incremental-pattern-search-backward "?"                     # <?>:      Search in history (backward)
+bind-vim viins vicmd         -- history-incremental-pattern-search-forward  "\C-s"                  # <Ctrl-s>: Search in history (forward)
+bind-vim       vicmd         -- history-incremental-pattern-search-forward  "/"                     # </>:      Search in history (forward)
+bind-vim viins vicmd isearch -- up-line-or-history                          "\C-p" "$terminfo[kpp]" # <Ctrl-p>|PgUp:   Go up in history
+bind-vim viins vicmd isearch -- down-line-or-history                        "\C-n" "$terminfo[knp]" # <Ctrl-n>|PgDown: Go up in history
+bind-vim viins               -- magic-space                                 " "                     # <Space>: Expand history on space
+bind-vim             isearch -- self-insert                                 "." 2> /dev/null        # Do not expand .... to ../.. during incremental search
 
-### Command mode
+### Delete chars/words
+bind-vim viins vicmd -- delete-char          "$terminf[kdch1]" # <Delete>: Delete next character
+bind-vim viins vicmd -- backward-delete-char "\C-h"            # <Ctrl-h>: Delete previous character
+bind-vim viins vicmd -- backward-kill-word   "\C-w"            # <Ctrl-w>: Delete previous word
+bind-vim viins vicmd -- kill-line            "\C-k"            # <Ctrl-k>: Kill line
+bind-vim viins vicmd -- backward-kill-line   "\C-u"            # <Ctrl-u>: Kill previous part of the line
 
-bindkey -M vicmd 'v'    edit-command-line                           # <v>: Edit command in an external editor
-bindkey -M vicmd 'u'    undo                                        # <u>: Undo
-bindkey -M vicmd '\C-R' redo                                        # <Ctrl-r>: Redo 
-bindkey -M vicmd '?'    history-incremental-pattern-search-backward
-bindkey -M vicmd '/'    history-incremental-pattern-search-forward
+# Undo/Redo
+bind-vim       vicmd -- undo "u"    # <u>: Undo
+bind-vim viins vicmd -- redo "\C-r" # <Ctrl-r>: Redo
+bind-vim       vicmd -- redo "U"    # <U>: Redo
 
-### Insert mode
+### Change mode
+bind-vim viins -- overwrite-mode "$terminf[kich1]" # <Insert>: Switch to overwrite mode
 
+### Change directory
 bindkey -M viins '.'               expand-dot-to-parent-dir # Expand .... to ../..
 
-bindkey -M viins '\e-s'            prepend-sudo             # <Esc-s>: Insert sudo at the beginning of the line
+### Completion
 bindkey -M viins "$terminfo[kcbt]" reverse-menu-complete    # <Shift-Tab>: Go to the previous menu item
-bindkey -M viins ' '               magic-space              # <Space>: Expand history on space (http://zsh.sourceforge.net/Doc/Release/Expansion.html#History-Expansion)
-bindkey -M viins '\C-L'            clear-screen             # <Ctrl-l>: Clear screen
 bindkey -M viins '\e-e'            expand-cmd-path          # <Esc-e>: Expand command name to full path
+
+### Tricks
+bindkey -M vicmd 'v'    edit-command-line                           # <v>: Edit command in an external editor
+bindkey -M viins '\e-s'            prepend-sudo             # <Esc-s>: Insert sudo at the beginning of the line
+bindkey -M viins '\C-L'            clear-screen             # <Ctrl-l>: Clear screen
 bindkey -M viins '\e-m'            copy-prev-shell-word     # <Esc-m>: Duplicate the previous word
 bindkey -M viins '\C-q'            push-line-or-edit        # <Ctrl-q>: Use a more flexible push-line
 
-### Incremental-search mode
+### Surround (similar behavior to Vim surround plugin)
+for m in visual viopp; do
+  for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
+    bind-vim $m -- select-bracketed $c
+  done
+done
 
-bindkey -M isearch . self-insert 2> /dev/null               # Do not expand .... to ../.. during incremental search
+for m in visual viopp; do
+  for c in {a,i}{\',\",\`}; do
+    bind-vim $m -- select-quoted "$c"
+  done
+done
 
-## Surround (similar behavior to Vim surround plugin)
-# TODO
-#autoload -Uz surround
-#zle -N delete-surround surround
-#zle -N change-surround surround
-#zle -N add-surround surround
-#vim-mode-bindkey vicmd  -- change-surround cs
-#vim-mode-bindkey vicmd  -- delete-surround ds
-#vim-mode-bindkey vicmd  -- add-surround    ys
-#vim-mode-bindkey visual -- add-surround    S
+bind-vim vicmd  -- change-surround "cs"
+bind-vim vicmd  -- delete-surround "ds"
+bind-vim vicmd  -- add-surround    "ys"
+bind-vim visual -- add-surround    "S"

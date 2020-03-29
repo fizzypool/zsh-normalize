@@ -77,11 +77,11 @@ TRAPWINCH() {
 ## Keybindings
 
 ### Navigation
-bind-vim viins vicmd -- beginning-of-line  "^a" '\e[1~'           # <Ctrl-a>|<Home>: Move to beginning of line TODO
-bind-vim viins vicmd -- end-of-line        "^e" "$terminfo[kend]" # <Ctrl-e>|<End>:  Move to end of line TODO
-bind-vim viins vicmd -- backward-word      "^b" "^[[1;5D"         # <Ctrl-Left>:     Move to previous word
-bind-vim viins vicmd -- forward-word       "^f" "^[[1;5C"         # <Ctrl-Right>:    Move to next word TODO
-bind-vim viins vicmd -- autosuggest-accept "^ "                   # <Ctrl-Space>:    Autosuggest accept TODO
+bind-vim viins vicmd -- beginning-of-line  '^a' '^[[H'    # <Ctrl-a>|<Home>: Move to beginning of line TODO
+bind-vim viins vicmd -- end-of-line        '^e' '^[[F'    # <Ctrl-e>|<End>:  Move to end of line TODO
+bind-vim viins vicmd -- backward-word      '^b' '^[[1;5D' # <Ctrl-Left>:     Move to previous word
+bind-vim viins vicmd -- forward-word       '^f' '^[[1;5C' # <Ctrl-Right>:    Move to next word
+bind-vim viins vicmd -- autosuggest-accept '^ '           # <Ctrl-Space>:    Autosuggest accept
 
 ### History
 bind-vim viins vicmd         -- history-incremental-pattern-search-backward "^r"                  # <Ctrl-r>: Search in history (backward) TODO

@@ -52,8 +52,7 @@ setopt nobeep                          # Avoid beeping
 
 ## Completion
 
-# Load and initialize the completion system ignoring insecure directories.
-autoload -Uz compinit && compinit -i
+autoload -Uz compinit && compinit -i   # Load and initialize the completion system ignoring insecure directories
 
 setopt   NO_NOMATCH                    # Try to avoid the 'zsh: no matches found...'
 setopt   HASH_LIST_ALL                 # Whenever a command completion is attempted, make sure the entire command path is hashed first

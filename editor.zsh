@@ -79,12 +79,12 @@ TRAPWINCH() {
 ## Keybindings
 
 ### Navigation
-bind-vim viins vicmd -- beginning-of-line "\\C-a" "$terminfo[khome]" # <Ctrl-a>|<Home>: Move to beginning of line
-bind-vim viins vicmd -- end-of-line       "\\C-e" "$terminfo[kend]"  # <Ctrl-e>|<End>:  Move to end of line
-bind-vim viins vicmd -- backward-char     "\\C-b"                    # <Ctrl-b>:        Move to previous character
-bind-vim viins vicmd -- forward-char      "\\C-f"                    # <Ctrl-f>:        Move to next character
-bind-vim viins vicmd -- backward-word     "\\C-$terminfo[kcub1]"     # <Ctrl-Left>:     Move to previous word
-bind-vim viins vicmd -- forward-word      "\\C-$terminfo[kcuf1]"     # <Ctrl-Right>:    Move to next word
+bind-vim viins vicmd -- beginning-of-line "\\C-a" "^[[1~"        # <Ctrl-a>|<Home>: Move to beginning of line
+bind-vim viins vicmd -- end-of-line       "\\C-e" "^[[4~"        # <Ctrl-e>|<End>:  Move to end of line
+bind-vim viins vicmd -- backward-char     "\\C-b"                # <Ctrl-b>:        Move to previous character
+bind-vim viins vicmd -- forward-char      "\\C-f"                # <Ctrl-f>:        Move to next character
+bind-vim viins vicmd -- backward-word     "\\C-$terminfo[kcub1]" # <Ctrl-Left>:     Move to previous word
+bind-vim viins vicmd -- forward-word      "\\C-$terminfo[kcuf1]" # <Ctrl-Right>:    Move to next word
 
 ### History
 bind-vim viins vicmd         -- history-incremental-pattern-search-backward "\\C-S"                  # <Ctrl-r>: Search in history (backward)
@@ -97,7 +97,7 @@ bind-vim viins               -- magic-space                                 " " 
 bind-vim             isearch -- self-insert                                 "." 2> /dev/null        # Do not expand .... to ../.. during incremental search
 
 ### Delete chars/words
-bind-vim viins vicmd -- delete-char          "$terminf[kdch1]" # <Delete>: Delete next character
+bind-vim viins vicmd -- delete-char          "$terminfo[kdch1]" # <Delete>: Delete next character
 bind-vim viins vicmd -- backward-delete-char "\\C-h"            # <Ctrl-h>: Delete previous character
 bind-vim viins vicmd -- backward-kill-word   "\\C-w"            # <Ctrl-w>: Delete previous word
 bind-vim viins vicmd -- kill-line            "\\C-k"            # <Ctrl-k>: Kill line

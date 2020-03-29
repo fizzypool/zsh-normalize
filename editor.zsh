@@ -79,7 +79,7 @@ TRAPWINCH() {
 ## Keybindings
 
 ### Navigation
-bind-vim viins vicmd -- beginning-of-line "\\C-a" "$terminfo[khome]" # <Ctrl-a>|<Home>: Move to beginning of line
+bind-vim viins vicmd -- beginning-of-line "\\C-a" "\e[1~" # <Ctrl-a>|<Home>: Move to beginning of line
 bind-vim viins vicmd -- end-of-line       "\\C-e" "$terminfo[kend]"  # <Ctrl-e>|<End>:  Move to end of line
 bind-vim viins vicmd -- backward-char     "\\C-b"                    # <Ctrl-b>:        Move to previous character
 bind-vim viins vicmd -- forward-char      "\\C-f"                    # <Ctrl-f>:        Move to next character

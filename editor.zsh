@@ -79,12 +79,12 @@ TRAPWINCH() {
 ## Keybindings
 
 ### Navigation
-bind-vim viins vicmd -- beginning-of-line "\\C-a" "\033[1~"        # <Ctrl-a>|<Home>: Move to beginning of line
-bind-vim viins vicmd -- end-of-line       "\\C-e" "^[[4~"        # <Ctrl-e>|<End>:  Move to end of line
-bind-vim viins vicmd -- backward-char     "\\C-b"                # <Ctrl-b>:        Move to previous character
-bind-vim viins vicmd -- forward-char      "\\C-f"                # <Ctrl-f>:        Move to next character
-bind-vim viins vicmd -- backward-word     "\\C-$terminfo[kcub1]" # <Ctrl-Left>:     Move to previous word
-bind-vim viins vicmd -- forward-word      "\\C-$terminfo[kcuf1]" # <Ctrl-Right>:    Move to next word
+bind-vim viins vicmd -- beginning-of-line "\\C-a" "$terminfo[khome]" # <Ctrl-a>|<Home>: Move to beginning of line
+bind-vim viins vicmd -- end-of-line       "\\C-e" "$terminfo[kend]"  # <Ctrl-e>|<End>:  Move to end of line
+bind-vim viins vicmd -- backward-char     "\\C-b"                    # <Ctrl-b>:        Move to previous character
+bind-vim viins vicmd -- forward-char      "\\C-f"                    # <Ctrl-f>:        Move to next character
+bind-vim viins vicmd -- backward-word     "\\C-$terminfo[kcub1]"     # <Ctrl-Left>:     Move to previous word
+bind-vim viins vicmd -- forward-word      "\\C-$terminfo[kcuf1]"     # <Ctrl-Right>:    Move to next word
 
 ### History
 bind-vim viins vicmd         -- history-incremental-pattern-search-backward "\\C-S"                  # <Ctrl-r>: Search in history (backward)

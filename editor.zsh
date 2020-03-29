@@ -79,51 +79,51 @@ TRAPWINCH() {
 ## Keybindings
 
 ### Navigation
-bind-vim viins vicmd -- beginning-of-line "\C-a" "$terminfo[khome]" # <Ctrl-a>|<Home>: Move to beginning of line
-bind-vim viins vicmd -- end-of-line       "\C-e" "$terminfo[kend]"  # <Ctrl-e>|<End>:  Move to end of line
-bind-vim viins vicmd -- backward-char     "\C-b"                    # <Ctrl-b>:        Move to previous character
-bind-vim viins vicmd -- forward-char      "\C-f"                    # <Ctrl-f>:        Move to next character
-bind-vim viins vicmd -- backward-word     "\C-$terminfo[kcub1]"     # <Ctrl-Left>:     Move to previous word
-bind-vim viins vicmd -- forward-word      "\C-$terminfo[kcuf1]"     # <Ctrl-Right>:    Move to next word
+bind-vim viins vicmd -- beginning-of-line "\\C-a" "$terminfo[khome]" # <Ctrl-a>|<Home>: Move to beginning of line
+bind-vim viins vicmd -- end-of-line       "\\C-e" "$terminfo[kend]"  # <Ctrl-e>|<End>:  Move to end of line
+bind-vim viins vicmd -- backward-char     "\\C-b"                    # <Ctrl-b>:        Move to previous character
+bind-vim viins vicmd -- forward-char      "\\C-f"                    # <Ctrl-f>:        Move to next character
+bind-vim viins vicmd -- backward-word     "\\C-$terminfo[kcub1]"     # <Ctrl-Left>:     Move to previous word
+bind-vim viins vicmd -- forward-word      "\\C-$terminfo[kcuf1]"     # <Ctrl-Right>:    Move to next word
 
 ### History
-bind-vim viins vicmd         -- history-incremental-pattern-search-backward "\C-S"                  # <Ctrl-r>: Search in history (backward)
+bind-vim viins vicmd         -- history-incremental-pattern-search-backward "\\C-S"                  # <Ctrl-r>: Search in history (backward)
 bind-vim       vicmd         -- history-incremental-pattern-search-backward "?"                     # <?>:      Search in history (backward)
-bind-vim viins vicmd         -- history-incremental-pattern-search-forward  "\C-s"                  # <Ctrl-s>: Search in history (forward)
+bind-vim viins vicmd         -- history-incremental-pattern-search-forward  "\\C-s"                  # <Ctrl-s>: Search in history (forward)
 bind-vim       vicmd         -- history-incremental-pattern-search-forward  "/"                     # </>:      Search in history (forward)
-bind-vim viins vicmd isearch -- up-line-or-history                          "\C-p" "$terminfo[kpp]" # <Ctrl-p>|PgUp:   Go up in history
-bind-vim viins vicmd isearch -- down-line-or-history                        "\C-n" "$terminfo[knp]" # <Ctrl-n>|PgDown: Go up in history
+bind-vim viins vicmd isearch -- up-line-or-history                          "\\C-p" "$terminfo[kpp]" # <Ctrl-p>|PgUp:   Go up in history
+bind-vim viins vicmd isearch -- down-line-or-history                        "\\C-n" "$terminfo[knp]" # <Ctrl-n>|PgDown: Go up in history
 bind-vim viins               -- magic-space                                 " "                     # <Space>: Expand history on space
 bind-vim             isearch -- self-insert                                 "." 2> /dev/null        # Do not expand .... to ../.. during incremental search
 
 ### Delete chars/words
 bind-vim viins vicmd -- delete-char          "$terminf[kdch1]" # <Delete>: Delete next character
-bind-vim viins vicmd -- backward-delete-char "\C-h"            # <Ctrl-h>: Delete previous character
-bind-vim viins vicmd -- backward-kill-word   "\C-w"            # <Ctrl-w>: Delete previous word
-bind-vim viins vicmd -- kill-line            "\C-k"            # <Ctrl-k>: Kill line
-bind-vim viins vicmd -- backward-kill-line   "\C-u"            # <Ctrl-u>: Kill previous part of the line
+bind-vim viins vicmd -- backward-delete-char "\\C-h"            # <Ctrl-h>: Delete previous character
+bind-vim viins vicmd -- backward-kill-word   "\\C-w"            # <Ctrl-w>: Delete previous word
+bind-vim viins vicmd -- kill-line            "\\C-k"            # <Ctrl-k>: Kill line
+bind-vim viins vicmd -- backward-kill-line   "\\C-u"            # <Ctrl-u>: Kill previous part of the line
 
 # Undo/Redo
 bind-vim       vicmd -- undo "u"    # <u>: Undo
-bind-vim viins vicmd -- redo "\C-r" # <Ctrl-r>: Redo
+bind-vim viins vicmd -- redo "\\C-r" # <Ctrl-r>: Redo
 bind-vim       vicmd -- redo "U"    # <U>: Redo
 
 ### Change mode
 bind-vim viins -- overwrite-mode "$terminf[kich1]" # <Insert>: Switch to overwrite mode
 
 ### Change directory
-bindkey -M viins '.'               expand-dot-to-parent-dir # Expand .... to ../..
+bind-vim viins -- expand-dot-to-parent-dir "." # Expand .... to ../..
 
 ### Completion
-bindkey -M viins "$terminfo[kcbt]" reverse-menu-complete    # <Shift-Tab>: Go to the previous menu item
-bindkey -M viins '\e-e'            expand-cmd-path          # <Esc-e>: Expand command name to full path
+bind-vim viins -- reverse-menu-complete "$terminfo[kcbt]" # <Shift-Tab>: Go to the previous menu item
+bind-vim viins -- expand-cmd-path       "\\e-e"           # <Esc-e>: Expand command name to full path
 
 ### Tricks
-bindkey -M vicmd 'v'    edit-command-line                           # <v>: Edit command in an external editor
-bindkey -M viins '\e-s'            prepend-sudo             # <Esc-s>: Insert sudo at the beginning of the line
-bindkey -M viins '\C-L'            clear-screen             # <Ctrl-l>: Clear screen
-bindkey -M viins '\e-m'            copy-prev-shell-word     # <Esc-m>: Duplicate the previous word
-bindkey -M viins '\C-q'            push-line-or-edit        # <Ctrl-q>: Use a more flexible push-line
+bind-vim vicmd -- edit-command-line    "v"     # <v>: Edit command in an external editor
+bind-vim viins -- prepend-sudo         "\\e-s" # <Esc-s>: Insert sudo at the beginning of the line
+bind-vim viins -- clear-screen         "\\C-L" # <Ctrl-l>: Clear screen
+bind-vim viins -- copy-prev-shell-word "\\e-m" # <Esc-m>: Duplicate the previous word
+bind-vim viins -- push-line-or-edit    "\\C-q" # <Ctrl-q>: Use a more flexible push-line
 
 ### Surround (similar behavior to Vim surround plugin)
 for m in visual viopp; do

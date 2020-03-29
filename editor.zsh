@@ -1,8 +1,7 @@
 ## Load/define Widgets
 
-# Load widget for line editing in an external editor
-autoload -Uz edit-command-line
-zle -N edit-command-line
+# Load pre-existing widgets
+autoload -Uz edit-command-line; zle -N edit-command-line
 
 # Define widget to expand .... to ../..
 function expand-dot-to-parent-dir {
@@ -50,20 +49,26 @@ TRAPWINCH() {
 
 ### All modes
 
+bindkey '\C-r' history-incremental-pattern-search-backward # <Ctrl-r>: Search in history (backward)
+bindkey '\C-s' history-incremental-pattern-search-forward  # <Ctrl-s>: Search in history (forward)
+bindkey '\C-p' up-history       # <Ctrl-P>: Go up in history (allow to navigate in search)
+bindkey '\C-n' down-history     # <Ctrl-N>: Go up in history (allow to navigate in search)
+bindkey '\C-a' beginning-of-line # <Ctrl-a>: Move to beginning of line
+bindkey '\C-e' end-of-line       # <Ctrl-e>: Move to end of line
+
+# TODO
+# allow ctrl-h, ctrl-w, ctrl-? for char and word deletion (standard behaviour)
+#bindkey '^?' backward-delete-char
+#bindkey '^h' backward-delete-char
+#bindkey '^w' backward-kill-word
 
 ### Command mode
 
 bindkey -M vicmd 'v'    edit-command-line                  # <v>: Edit command in an external editor
 bindkey -M vicmd 'u'    undo                               # <u>: Undo
 bindkey -M vicmd '\C-R' redo                               # <Ctrl-r>: Redo 
-
-if (( $+widgets[history-incremental-pattern-search-backward] )); then
-  bindkey -M vicmd "?" history-incremental-pattern-search-backward
-  bindkey -M vicmd "/" history-incremental-pattern-search-forward
-else
-  bindkey -M vicmd "?" history-incremental-search-backward
-  bindkey -M vicmd "/" history-incremental-search-forward
-fi
+bindkey -M vicmd "?" history-incremental-pattern-search-backward
+bindkey -M vicmd "/" history-incremental-pattern-search-forward
 
 ### Insert mode
 
@@ -76,3 +81,14 @@ bindkey -M viins '\C-L'            clear-screen             # <Ctrl-l>: Clear sc
 ### Incremental-search mode
 
 bindkey -M isearch . self-insert 2> /dev/null               # Do not expand .... to ../.. during incremental search
+
+## Surround (similar behavior to Vim surround plugin)
+# TODO
+#autoload -Uz surround
+#zle -N delete-surround surround
+#zle -N change-surround surround
+#zle -N add-surround surround
+#vim-mode-bindkey vicmd  -- change-surround cs
+#vim-mode-bindkey vicmd  -- delete-surround ds
+#vim-mode-bindkey vicmd  -- add-surround    ys
+#vim-mode-bindkey visual -- add-surround    S

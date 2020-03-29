@@ -1,3 +1,12 @@
+# Built-in readlink in OSX doesn't work: the coreutils version is needed.
+if [[ uname == 'Darwin' ]]; then
+  readlink_cmd=greadlink
+else
+  readlink_cmd=readlink
+fi
+base_dir=$(dirname $(eval $readlink_cmd -f ${(%):-%N}))
+
+
 ## Prompt
 
 setopt PROMPT_SUBST                    # Allow expansion in prompts
@@ -83,3 +92,11 @@ setopt HIST_IGNORE_SPACE               # Don't record an event starting with a s
 setopt HIST_SAVE_NO_DUPS               # Don't write a duplicate event to the history file
 setopt HIST_VERIFY                     # Don't execute immediately upon history expansion
 setopt HIST_BEEP                       # Beep when accessing non-existent history
+
+## Common alias
+
+source "${base_dir}/common-alias.zsh"  # Load some common aliases
+
+
+## Cleanup
+unset base_dir

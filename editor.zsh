@@ -102,12 +102,14 @@ bind-vim viins vicmd         -- history-incremental-pattern-search-backward '^r'
 bind-vim       vicmd         -- history-incremental-pattern-search-backward '?'                   # <?>:      Search in history (backward)
 bind-vim viins vicmd         -- history-incremental-pattern-search-forward  '^s'                  # <Ctrl-s>: Search in history (forward)
 bind-vim       vicmd         -- history-incremental-pattern-search-forward  '/'                   # </>:      Search in history (forward)
-bind-vim viins vicmd isearch -- history-substring-search-up                 '^p' "$terminfo[kpp]" # <Ctrl-p>|<PgUp>:   Go up in history
-bind-vim       vicmd         -- history-substring-search-up                 'k'                   # <k>:               Go up in history
-bind-vim viins vicmd isearch -- history-substring-search-down               '^n' "$terminfo[knp]" # <Ctrl-n>|<PgDown>: Go down in history
-bind-vim       vicmd         -- history-substring-search-down               'j'                   # <j>:               Go down in history
-bind-vim viins               -- magic-space                                 ' '                   # <Space>: Expand history on space
-bind-vim             isearch -- self-insert                                 '.' 2> /dev/null      # Do not expand .... to ../.. during incremental search
+
+bind-vim viins vicmd isearch -- history-substring-search-up    '^p' "$terminfo[kcuu1]" "$terminfo[kpp]" # <Ctrl-p>|<Up>|<PgUp>:     Go up in history
+bind-vim       vicmd         -- history-substring-search-up    'k'                                      # <k>:                      Go up in history
+bind-vim viins vicmd isearch -- history-substring-search-down  '^n' "$terminfo[kcud1]" "$terminfo[knp]" # <Ctrl-n>|<Down>|<PgDown>: Go down in history
+bind-vim       vicmd         -- history-substring-search-down  'j'                                      # <j>:                      Go down in history
+
+bind-vim viins               -- magic-space  ' '              # <Space>: Expand history on space
+bind-vim             isearch -- self-insert  '.' 2> /dev/null # Do not expand .... to ../.. during incremental search
 
 ### Delete chars/words
 bind-vim viins vicmd -- delete-char          "$terminfo[kdch1]" # <Delete>: Delete next character

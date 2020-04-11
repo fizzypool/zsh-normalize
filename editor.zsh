@@ -1,4 +1,4 @@
-## Utility functions
+## UTILITY FUNCTIONS ###########################################################
 
 # Define a bindkey for vi-mode
 function bind-vim () {
@@ -26,7 +26,7 @@ function bind-vim () {
   done
 }
 
-## Init
+## INIT ########################################################################
 
 # Allow usage of $terminfo
 zmodload zsh/terminfo
@@ -43,7 +43,7 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
   zle -N zle-line-finish
 fi
 
-## Load/define Widgets
+## LOAD/DEFINE WIDGETS #########################################################
 
 # Load pre-existing widgets
 autoload -Uz edit-command-line; zle -N edit-command-line
@@ -70,10 +70,7 @@ function prepend-sudo {
 }
 zle -N prepend-sudo
 
-## General
-
-# Enable Vim keybindings
-bindkey -v
+## GENERAL #####################################################################
 
 # Treat these characters as part of a word
 WORDCHARS='*?[]~&;!#$%^(){}<>'
@@ -83,12 +80,32 @@ WORDCHARS='*?[]~&;!#$%^(){}<>'
 #          eg: https://github.com/zsh-users/zsh-autosuggestions/issues/254#issuecomment-345175735
 export KEYTIMEOUT=30
 
+# Enable Vim keybindings
+bindkey -v
+
 # Ensure that the prompt is redrawn when the terminal size changes.
 TRAPWINCH() {
   zle &&  zle -R
 }
 
-## Keybindings
+# Enable/disable terminal application mode
+if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
+  # Enables terminal application mode and updates editor information.
+  function zle-line-init() {
+    # Enable terminal application mode.
+    echoti smkx
+  }
+  zle -N zle-line-init
+
+  # Disables terminal application mode and updates editor information.
+  function zle-line-finish() {
+    # Disable terminal application mode.
+    echoti rmkx
+  }
+  zle -N zle-line-finish
+fi
+
+## KEYBINDINGS #################################################################
 
 ### Navigation
 bind-vim viins vicmd -- beginning-of-line  '^a' '^[[H'    # <Ctrl-a>|<Home>: Move to beginning of line TODO
@@ -98,10 +115,10 @@ bind-vim viins vicmd -- forward-word       '^f' '^[[1;5C' # <Ctrl-Right>:    Mov
 bind-vim viins vicmd -- autosuggest-accept '^ '           # <Ctrl-Space>:    Autosuggest accept
 
 ### History
-bind-vim viins vicmd         -- history-incremental-pattern-search-backward '^r'                  # <Ctrl-r>: Search in history (backward) TODO
-bind-vim       vicmd         -- history-incremental-pattern-search-backward '?'                   # <?>:      Search in history (backward)
-bind-vim viins vicmd         -- history-incremental-pattern-search-forward  '^s'                  # <Ctrl-s>: Search in history (forward)
-bind-vim       vicmd         -- history-incremental-pattern-search-forward  '/'                   # </>:      Search in history (forward)
+bind-vim viins vicmd         -- history-incremental-pattern-search-backward '^r' # <Ctrl-r>: Search in history (backward) TODO
+bind-vim       vicmd         -- history-incremental-pattern-search-backward '?'  # <?>:      Search in history (backward)
+bind-vim viins vicmd         -- history-incremental-pattern-search-forward  '^s' # <Ctrl-s>: Search in history (forward)
+bind-vim       vicmd         -- history-incremental-pattern-search-forward  '/'  # </>:      Search in history (forward)
 
 bind-vim viins vicmd isearch -- history-substring-search-up    '^p' "$terminfo[kcuu1]" "$terminfo[kpp]" # <Ctrl-p>|<Up>|<PgUp>:     Go up in history
 bind-vim       vicmd         -- history-substring-search-up    'k'                                      # <k>:                      Go up in history

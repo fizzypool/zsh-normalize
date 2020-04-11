@@ -61,15 +61,6 @@ function expand-dot-to-parent-dir {
 }
 zle -N expand-dot-to-parent-dir
 
-# Define widget to insert sudo at the beginning of the line
-function prepend-sudo {
-  if [[ "$BUFFER" != su(do|)\ * ]]; then
-    BUFFER="sudo $BUFFER"
-    (( CURSOR += 5 ))
-  fi
-}
-zle -N prepend-sudo
-
 ## GENERAL #####################################################################
 
 # Treat these characters as part of a word
@@ -151,7 +142,6 @@ bind-vim viins -- expand-cmd-path       '\ee'             # <Esc-e>: Expand comm
 
 ### Tricks
 bind-vim vicmd -- edit-command-line    'v'   # <v>: Edit command in an external editor TODO
-bind-vim viins -- prepend-sudo         '\es' # <Esc-s>: Insert sudo at the beginning of the line
 bind-vim viins -- clear-screen         '^L'  # <Ctrl-l>: Clear screen
 bind-vim viins -- copy-prev-shell-word '\em' # <Esc-m>: Duplicate the previous word
 bind-vim viins -- push-line-or-edit    '^q'  # <Ctrl-q>: Use a more flexible push-line

@@ -76,7 +76,7 @@ zle -N prepend-sudo
 bindkey -v
 
 # Treat these characters as part of a word
-WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
+WORDCHARS='*?[]~&;!#$%^(){}<>'
 
 # Don't wait too long after <Esc> to see if it's an arrow / function key
 # Warning: Setting this too low can break some zsh functionality,

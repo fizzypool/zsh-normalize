@@ -120,7 +120,7 @@ bind-vim viins               -- magic-space  ' '              # <Space>: Expand 
 bind-vim             isearch -- self-insert  '.' 2> /dev/null # Do not expand .... to ../.. during incremental search
 
 ### Delete chars/words
-bind-vim viins vicmd -- backward-delete-char '^?'               # <Backspace>: Delete previous word
+#bind-vim viins vicmd -- backward-delete-char '^?'               # <Backspace>: Delete previous word
 bind-vim viins vicmd -- delete-char          "$terminfo[kdch1]" # <Delete>: Delete next character
 bind-vim viins vicmd -- backward-delete-char '^h'               # <Ctrl-h>: Delete previous character
 bind-vim viins vicmd -- backward-kill-word   '^w'               # <Ctrl-w>: Delete previous word

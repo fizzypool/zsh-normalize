@@ -142,7 +142,7 @@ bind-vim viins -- expand-cmd-path       '^[e'             # <Alt-e>: Expand comm
 
 ### Tricks
 bind-vim vicmd -- edit-command-line    'v'   # <v>: Edit command in an external editor TODO
-bind-vim viins -- clear-screen         '^L'  # <Ctrl-l>: Clear screen
+bind-vim viins -- clear-screen         '^l'  # <Ctrl-l>: Clear screen
 bind-vim viins -- copy-prev-shell-word '^[m' # <Alt-m>: Duplicate the previous word
 bind-vim viins -- push-line-or-edit    '^q'  # <Ctrl-q>: Use a more flexible push-line
 

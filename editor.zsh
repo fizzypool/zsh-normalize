@@ -144,7 +144,7 @@ bind-vim viins -- expand-cmd-path       '^x'              # <Ctrl-x>: Expand com
 ### Tricks
 bind-vim vicmd -- edit-command-line    'v'  # <v>: Edit command in an external editor TODO
 bind-vim viins -- clear-screen         '^L' # <Ctrl-Shift-l>: Clear screen
-bind-vim viins -- copy-prev-shell-word '^M' # <Ctrl-Shift-m>: Duplicate the previous word
+bind-vim viins -- copy-prev-shell-word '^n' # <Ctrl-n>: Duplicate the previous word
 bind-vim viins -- push-line-or-edit    '^q' # <Ctrl-q>: Use a more flexible push-line
 
 ### Surround (similar behavior to Vim surround plugin)

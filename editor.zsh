@@ -138,12 +138,12 @@ bind-vim viins -- expand-dot-to-parent-dir '.' # Expand .... to ../..
 
 ### Completion
 bind-vim viins -- reverse-menu-complete "$terminfo[kcbt]" # <Shift-Tab>: Go to the previous menu item
-bind-vim viins -- expand-cmd-path       '\ee'             # <Esc-e>: Expand command name to full path
+bind-vim viins -- expand-cmd-path       '^[e'             # <Alt-e>: Expand command name to full path
 
 ### Tricks
 bind-vim vicmd -- edit-command-line    'v'   # <v>: Edit command in an external editor TODO
 bind-vim viins -- clear-screen         '^L'  # <Ctrl-l>: Clear screen
-bind-vim viins -- copy-prev-shell-word '\em' # <Esc-m>: Duplicate the previous word
+bind-vim viins -- copy-prev-shell-word '^[m' # <Alt-m>: Duplicate the previous word
 bind-vim viins -- push-line-or-edit    '^q'  # <Ctrl-q>: Use a more flexible push-line
 
 ### Surround (similar behavior to Vim surround plugin)

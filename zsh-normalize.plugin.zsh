@@ -3,7 +3,7 @@
 ## Init.
 
 ### Built-in readlink in OSX doesn't work: the coreutils version is needed.
-if [[ uname == 'Darwin' ]]; then
+if [[ "$(uname)" == "Darwin" ]]; then
   readlink_cmd=greadlink
 else
   readlink_cmd=readlink

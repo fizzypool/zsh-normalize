@@ -99,33 +99,33 @@ fi
 ## KEYBINDINGS #################################################################
 
 ### Navigation
-bind-vim viins vicmd -- beginning-of-line  '^a' '^[[H'    # <Ctrl-a>|<Home>: Move to beginning of line TODO
-bind-vim viins vicmd -- end-of-line        '^e' '^[[F'    # <Ctrl-e>|<End>:  Move to end of line TODO
-bind-vim viins vicmd -- backward-word      '^b' '^[[1;5D' # <Ctrl-Left>:     Move to previous word
-bind-vim viins vicmd -- forward-word       '^f' '^[[1;5C' # <Ctrl-Right>:    Move to next word
-bind-vim viins vicmd -- autosuggest-accept '^ '           # <Ctrl-Space>:    Autosuggest accept
+bind-vim emacs viins vicmd -- beginning-of-line  '^a' '^a' '^[[H'    # <Ctrl-a>|<Home>: Move to beginning of line TODO
+bind-vim emacs viins vicmd -- end-of-line        '^e' '^e' '^[[F'    # <Ctrl-e>|<End>:  Move to end of line TODO
+bind-vim emacs viins vicmd -- backward-word      '^b' '^b' '^[[1;5D' # <Ctrl-Left>:     Move to previous word
+bind-vim emacs viins vicmd -- forward-word       '^f' '^f' '^[[1;5C' # <Ctrl-Right>:    Move to next word
+bind-vim emacs viins vicmd -- autosuggest-accept '^ ' '^ ' '^ '      # <Ctrl-Space>:    Autosuggest accept
 
 ### History
-bind-vim viins vicmd         -- history-incremental-pattern-search-backward '^r' # <Ctrl-r>: Search in history (backward) TODO
-bind-vim       vicmd         -- history-incremental-pattern-search-backward '?'  # <?>:      Search in history (backward)
-bind-vim viins vicmd         -- history-incremental-pattern-search-forward  '^s' # <Ctrl-s>: Search in history (forward)
-bind-vim       vicmd         -- history-incremental-pattern-search-forward  '/'  # </>:      Search in history (forward)
+bind-vim emacs viins vicmd -- history-incremental-pattern-search-backward '^r' # <Ctrl-r>: Search in history (backward) TODO
+bind-vim             vicmd -- history-incremental-pattern-search-backward '?'  # <?>:      Search in history (backward)
+bind-vim emacs viins vicmd -- history-incremental-pattern-search-forward  '^s' # <Ctrl-s>: Search in history (forward)
+bind-vim             vicmd -- history-incremental-pattern-search-forward  '/'  # </>:      Search in history (forward)
 
-bind-vim viins vicmd isearch -- history-substring-search-up    '^p' "$terminfo[kcuu1]" "$terminfo[kpp]" # <Ctrl-p>|<Up>|<PgUp>:     Go up in history
-bind-vim       vicmd         -- history-substring-search-up    'k'                                      # <k>:                      Go up in history
-bind-vim viins vicmd isearch -- history-substring-search-down  '^n' "$terminfo[kcud1]" "$terminfo[knp]" # <Ctrl-n>|<Down>|<PgDown>: Go down in history
-bind-vim       vicmd         -- history-substring-search-down  'j'                                      # <j>:                      Go down in history
+bind-vim emacs viins vicmd isearch -- history-substring-search-up    '^p' '^p' "$terminfo[kcuu1]" "$terminfo[kpp]" # <Ctrl-p>|<Up>|<PgUp>:     Go up in history
+bind-vim             vicmd         -- history-substring-search-up    'k'                                      # <k>:                      Go up in history
+bind-vim emacs viins vicmd isearch -- history-substring-search-down  '^n' '^n' "$terminfo[kcud1]" "$terminfo[knp]" # <Ctrl-n>|<Down>|<PgDown>: Go down in history
+bind-vim             vicmd         -- history-substring-search-down  'j'                                      # <j>:                      Go down in history
 
-bind-vim viins               -- magic-space  ' '              # <Space>: Expand history on space
-bind-vim             isearch -- self-insert  '.' 2> /dev/null # Do not expand .... to ../.. during incremental search
+bind-vim emacs viins               -- magic-space  ' ' ' '              # <Space>: Expand history on space
+bind-vim                   isearch -- self-insert  '.' 2> /dev/null     # Do not expand .... to ../.. during incremental search
 
 ### Delete chars/words
-bind-vim viins vicmd -- backward-delete-char '^?'               # <Backspace>: Delete previous word
-bind-vim viins vicmd -- delete-char          "$terminfo[kdch1]" # <Delete>: Delete next character
-bind-vim viins vicmd -- backward-delete-char '^h'               # <Ctrl-h>: Delete previous character
-bind-vim viins vicmd -- backward-kill-word   '^w'               # <Ctrl-w>: Delete previous word
-bind-vim viins vicmd -- kill-line            '^k'               # <Ctrl-k>: Kill next part of the line
-bind-vim viins vicmd -- backward-kill-line   '^u'               # <Ctrl-u>: Kill previous part of the line
+bind-vim       viins vicmd -- backward-delete-char '^?'               # <Backspace>: Delete previous word
+bind-vim emacs viins vicmd -- delete-char          "$terminfo[kdch1]" "$terminfo[kdch1]" "$terminfo[kdch1]" # <Delete>: Delete next character
+bind-vim emacs viins vicmd -- backward-delete-char '^h' '^h' '^h'  # <Ctrl-h>: Delete previous character
+bind-vim emacs viins vicmd -- backward-kill-word   '^w' '^w' '^w'  # <Ctrl-w>: Delete previous word
+bind-vim emacs viins vicmd -- kill-line            '^k' '^k' '^k'  # <Ctrl-k>: Kill next part of the line
+bind-vim emacs viins vicmd -- backward-kill-line   '^u' '^u' '^u'  # <Ctrl-u>: Kill previous part of the line
 
 # Undo/Redo
 bind-vim vicmd -- undo 'u'      # <u>: Undo
@@ -138,8 +138,8 @@ bind-vim viins -- overwrite-mode "$terminf[kich1]" # <Insert>: Switch to overwri
 bind-vim viins -- expand-dot-to-parent-dir '.' # Expand .... to ../..
 
 ### Completion
-bind-vim viins -- reverse-menu-complete "$terminfo[kcbt]" # <Shift-Tab>: Go to the previous menu item
-bind-vim viins -- expand-cmd-path       '^x'              # <Ctrl-x>: Expand command name to full path
+bind-vim       viins -- reverse-menu-complete "$terminfo[kcbt]" # <Shift-Tab>: Go to the previous menu item
+bind-vim emacs viins -- expand-cmd-path       '^x' '^x'         # <Ctrl-x>: Expand command name to full path
 
 ### Tricks
 bind-vim vicmd -- edit-command-line    'v'  # <v>: Edit command in an external editor TODO

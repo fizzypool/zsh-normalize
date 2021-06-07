@@ -72,7 +72,7 @@ WORDCHARS='*?[]~&;!#$%^(){}<>'
 export KEYTIMEOUT=30
 
 # Enable Vim keybindings
-bindkey -v
+bindkey -e
 
 # Ensure that the prompt is redrawn when the terminal size changes.
 TRAPWINCH() {
